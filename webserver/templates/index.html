@@ -12,16 +12,22 @@
   <div>{{data}}</div>
 
   <div>
-    {% for n in data %}
-    <div>{{n}}</div>
-    {% endfor %}
+    <a href="/users">All Users</a>
   </div>
 
 <p><a href="/another">Go to the other page</a></p>
 
-<form method="POST" action="/add">
-<p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-</form>
+
+  <div>
+    <form id="search" method="POST">
+      <input type="search" id="content" name="content"> 
+      <select name="option" id="option" form="search">
+        <option value="user_by_name">Search by user_name</option>
+      </select>
+      <input type="submit" name="search">
+    </form>
+  </div>
+
 
 </body>
 
