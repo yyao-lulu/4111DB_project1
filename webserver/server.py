@@ -117,10 +117,22 @@ def teardown_request(exception):
 @app.route('/', methods=['GET','POST'])
 def index():
   if request.method == 'POST':
-    data = request.form.to_dict(flat=True)
-    if data['option'] == 'user_by_name':
-      return redirect(url_for('read_user', id=data['content']))
-  return render_template("index.html")
+        data = request.form.to_dict(flat=True)
+        if data['option'] == 'user_by_name':
+            cursor = g.conn.execute("SELECT user_name FROM venmo_users WHERE user_name = %s", data['content'])
+            user = cursor.fetchone()
+            if user is None:
+                return render_template('index.html', error="No such user")
+            return redirect(url_for('read_user', id=data['content']))
+        elif data['option'] == 'trx_by_date':
+            cursor = g.conn.execute("SELECT payment_id FROM transa_transf WHERE created_time = %s", data['content'])
+            corporation = cursor.fetchone()
+            if corporation is None:
+                return render_template('index.html', error="No such transaction")
+            return redirect(url_for('read_trx', id=data['content']))
+        else:
+            return render_template('index.html', error="Invalid option")
+  return render_template("index.html", error=None)
 
 @app.route('/users')
 def users():
@@ -133,6 +145,12 @@ def read_user(id):
   cursor = g.conn.execute("SELECT * FROM vtest WHERE user_name = %s", id)
   user = cursor.fetchone()
   return render_template('/user.html', user=user)
+
+@app.route('/trx/<id>')
+def read_trx(id):
+  cursor = g.conn.execute("SELECT * FROM transa_transf WHERE created_time = %s", id)
+  trx = cursor.fetchall()
+  return render_template('/trx.html', trx=trx)
 
 
 @app.route('/another')
