@@ -1,13 +1,13 @@
 <table>
-    <caption>Search for Transactions in one day</caption>
+    <h2>Search for Transactions on {{date.created_time}}</h2>
     <thead>
         <tr>
-            <th>created_time</th>
-            <th scope="col">payment_id </th>
-            <th scope="col">pay_charge</th>
-            <th scope="col">actor_name </th>
-            <th scope="col">target_name </th>
-            <th scope="col">message </th>
+            <th>Payment ID</th>
+            <th scope="col"> Time </th>
+            <th scope="col">Pay/charge</th>
+            <th scope="col">Actor name </th>
+            <th scope="col">Target name </th>
+            <th scope="col">Message </th>
         </tr>
     </thead>
     <tbody>
@@ -16,11 +16,17 @@
             <td>{{ row[0] }}</td>
             <td>{{ row[1] }}</td>
             <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
+            <td><a href="{{ url_for('read_user',id=row[3]) }}">{{ row[3] }}</a></td>
+            <td><a href="{{ url_for('read_user',id=row[4]) }}">{{ row[4] }}</a></td>
             <td>{{ row[5] }}</td>
           </tr>
     	{% endfor %}
 
     </tbody>
 </table>
+
+
+
+
+<br><br><br>
+<a href="/">Back to home

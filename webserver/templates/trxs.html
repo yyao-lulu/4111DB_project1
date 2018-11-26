@@ -1,0 +1,30 @@
+<table>
+    <h1>Search for All Transactions</h1>
+    <thead>
+      <tr>
+          <th>Payment ID</th>
+          <th scope="col">Time</th>
+          <th scope="col">Pay/Charge</th>
+          <th scope="col">Actor name</th>
+          <th scope="col">Target name</th>
+          <th scope="col">Message</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{% for row in trxs %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td><a href="{{ url_for('read_trx',id=row[1]) }}">{{ row[1] }}</a></td>
+            <td>{{ row[2] }}</td>
+            <td><a href="{{ url_for('read_user',id=row[3]) }}">{{ row[3] }}</a></td>
+            <td><a href="{{ url_for('read_user',id=row[4]) }}">{{ row[4] }}</a></td>
+            <td>{{ row[5]}}</td>
+          </tr>
+    	{% endfor %}
+
+    </tbody>
+</table>
+
+
+<br><br><br>
+<a href="/">Back to home

@@ -1,10 +1,10 @@
 <table>
-    <caption>User Risk Analysis</caption>
+    <h1>User Risk Analysis</h1>
     <thead>
         <tr>
-            <th>Venmo username</th>
-            <th scope="col">too many payments</th>
-            <th scope="col">too many friends shown</th>
+            <th>User name</th>
+            <th scope="col">Too many payments</th>
+            <th scope="col">Too many friends shown</th>
             <th scope="col">Track to Facebook </th>
             <th scope="col">Too detailed notes </th>
             <th scope="col">Risk level </th>
@@ -12,14 +12,25 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-          <th scope="row">{{risk.user_name}}</th>
-          <td>{{risk.too_many_payments}}</td>
-          <td>{{risk.too_many_friends_shown}}</td>
-          <td>{{risk.track_to_facebook}}</td>
-          <td>{{risk.too_detailed_notes}}</td>
-          <td>{{risk.risk_level}}</td>
-          <td>{{risk.keyword}}</td>
+        {% for row in users %}
+          <tr>
+            <td><a href="{{ url_for('read_user',id=row[0]) }}">{{ row[0] }}</a></td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4]}}</td>
+            <td>{{ row[6]}}</td>
+            <td>{{ row[7]}}</td>
           </tr>
+      {% endfor %}
     </tbody>
 </table>
+
+
+
+
+
+
+
+<br><br><br>
+<a href="/">Back to home

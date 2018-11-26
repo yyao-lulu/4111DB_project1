@@ -1,21 +1,48 @@
-<table>
-    <caption>User Personal Info</caption>
-    <thead>
-        <tr>
-            <th>Venmo username</th>
-            <th scope="col">full name</th>
-            <th scope="col">photo link</th>
-            <th scope="col">Facebook link</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <th scope="row">{{user.user_name}}</th>
-          <td>{{user.full_name}}</td>
-          <td>{{user.photo_link}}</td>
-          <td>{{user.fb_account}}</td>
-          </tr>
-    </tbody>
-</table>
+<html>
+    <style>
+        body{
+            font-size: 15pt;
+            font-family: arial;
+        }
+    </style>
 
-<p><a href="/risk/{{user.user_name}}">Go to the your risk analysis page</a></p>
+<body>
+
+  <h2>User Information: {{ user.user_name }}</h2>
+
+    <div">
+        Full name: {{ user.full_name }}<br>
+        Photo link: {{ user.photo_link }}<br>
+        Facebook: {{ user.fb_account }}
+    </div>
+
+    <div>
+        <p><b>Risk Evaluation</b></p>
+        Risk 1. Too many transactions: {{ risk.too_many_payments }}<br>
+        Risk 2. Too many friends shown to the public: {{ risk.too_many_friends_shown }}<br>
+        Risk 3. Track to Facebook: {{ risk.track_to_facebook }}<br>
+        Risk 4. Too detailed transaction message: {{ risk.too_detailed_notes }}<br>
+    </div>
+
+  <br><br>
+  Based on the evaluation, your risk level is: <b>{{ risk.risk_level }}</b> (<a href="/risk/{{risk.risk_level}}">Click to see more users in your risk group</a>)
+
+
+  <p><a href="https://www.google.com/search?q={{ risk.keyword }}">Search for potential risk</a></p>
+
+</body>
+
+
+
+<br><br><br>
+<a href="/">Back to home
+
+</html>
+
+
+
+
+
+
+
+

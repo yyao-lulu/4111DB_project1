@@ -94,8 +94,8 @@ def index():
             if transaction_by_date is None:
                 return render_template('index.html', error="No such transaction")
             return redirect(url_for('read_trx', id=data['content']))
-        elif data['option'] == 'risk_by_name':
-            cursor = g.conn.execute("SELECT user_name FROM person_risk_temp WHERE user_name = %s", data['content'])
+        elif data['option'] == 'risk_by_level':
+            cursor = g.conn.execute("SELECT user_name FROM person_risk_temp WHERE risk_level = %s", data['content'])
             user_risk = cursor.fetchone()
             if user_risk is None:
                 return render_template('index.html', error="No such user")
@@ -110,23 +110,33 @@ def users():
   users = cursor.fetchall()
   return render_template('users.html', users=users)
 
+@app.route('/trxs')
+def trxs():
+  cursor = g.conn.execute("SELECT * FROM transa_transf")
+  trxs = cursor.fetchall()
+  return render_template('trxs.html', trxs=trxs)
+
 @app.route('/user/<id>')
 def read_user(id):
   cursor = g.conn.execute("SELECT * FROM venmo_users WHERE user_name = %s", id)
   user = cursor.fetchone()
-  return render_template('/user.html', user=user)
+  cursor = g.conn.execute("SELECT * FROM person_risk_result WHERE user_name = %s", id)
+  risk = cursor.fetchone()
+  return render_template('/user.html', user=user, risk=risk)
 
 @app.route('/risk/<id>')
 def read_risk(id):
-   cursor = g.conn.execute("SELECT * FROM person_risk_result WHERE user_name = %s", id)
-   risk = cursor.fetchone()
-   return render_template('/risk.html', risk = risk)
+   cursor = g.conn.execute("SELECT * FROM person_risk_result WHERE risk_level = %s", id)
+   users = cursor.fetchall()
+   return render_template('/risk.html', users = users)
 
 @app.route('/trx/<id>')
 def read_trx(id):
   cursor = g.conn.execute("SELECT * FROM transa_transf WHERE created_time = %s", id)
   trx = cursor.fetchall()
-  return render_template('/trx.html', trx=trx)
+  cursor = g.conn.execute("SELECT * FROM transa_transf WHERE created_time = %s", id)
+  date = cursor.fetchone()
+  return render_template('/trx.html', trx=trx, date=date)
 
 
 @app.route('/another')
