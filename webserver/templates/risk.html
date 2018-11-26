@@ -1,0 +1,25 @@
+<table>
+    <caption>User Risk Analysis</caption>
+    <thead>
+        <tr>
+            <th>Venmo username</th>
+            <th scope="col">too many payments</th>
+            <th scope="col">too many friends shown</th>
+            <th scope="col">Track to Facebook </th>
+            <th scope="col">Too detailed notes </th>
+            <th scope="col">Risk level </th>
+            <th scope="col">Keywords </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th scope="row">{{risk.user_name}}</th>
+          <td>{{risk.too_many_payments}}</td>
+          <td>{{risk.too_many_friends_shown}}</td>
+          <td>{{risk.track_to_facebook}}</td>
+          <td>{{risk.too_detailed_notes}}</td>
+          <td>{{risk.risk_level}}</td>
+          <td>{{risk.keyword}}</td>
+          </tr>
+    </tbody>
+</table>

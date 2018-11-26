@@ -1,16 +1,21 @@
-<html>
-    <style>
-        body{
-            font-size: 15pt;
-            font-family: arial;
-        }
-    </style>
+<table>
+    <caption>User Personal Info</caption>
+    <thead>
+        <tr>
+            <th>Venmo username</th>
+            <th scope="col">full name</th>
+            <th scope="col">photo link</th>
+            <th scope="col">Facebook link</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th scope="row">{{user.user_name}}</th>
+          <td>{{user.full_name}}</td>
+          <td>{{user.photo_link}}</td>
+          <td>{{user.fb_account}}</td>
+          </tr>
+    </tbody>
+</table>
 
-<body>
-    <div>
-        <p>{{ user }}</p>
-    </div>
-
-</body>
-
-</html>
+<p><a href="/risk/{{user.user_name}}">Go to the your risk analysis page</a></p>

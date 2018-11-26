@@ -1,16 +1,22 @@
-<html>
-    <style>
-        body{
-            font-size: 15pt;
-            font-family: arial;
-        }
-    </style>
+<table>
+    <caption>Search for all the user info</caption>
+    <thead>
+      <tr>
+          <th>Venmo username</th>
+          <th scope="col">full name</th>
+          <th scope="col">photo link</th>
+          <th scope="col">Facebook link</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{% for row in users %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+          </tr>
+    	{% endfor %}
 
-<body>
-    <p>All Users</p>
-    {% for n in users%}
-    <div>{{n.user_name}}</div>
-    {% endfor %}
-</body>
-
-</html>
+    </tbody>
+</table>
