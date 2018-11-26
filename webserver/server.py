@@ -95,7 +95,7 @@ def index():
                 return render_template('index.html', error="No such transaction")
             return redirect(url_for('read_trx', id=data['content']))
         elif data['option'] == 'risk_by_level':
-            cursor = g.conn.execute("SELECT user_name FROM person_risk_temp WHERE risk_level = %s", data['content'])
+            cursor = g.conn.execute("SELECT user_name FROM person_risk_result WHERE risk_level = %s", data['content'])
             user_risk = cursor.fetchone()
             if user_risk is None:
                 return render_template('index.html', error="No such user")
