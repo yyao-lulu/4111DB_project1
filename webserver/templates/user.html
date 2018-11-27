@@ -10,11 +10,38 @@
 
   <h2>User Information: {{ user.user_name }}</h2>
 
-    <div">
+    <div>
         Full name: {{ user.full_name }}<br>
         Photo link: {{ user.photo_link }}<br>
         Facebook: {{ user.fb_account }}
     </div>
+
+
+
+    <div>
+    <table>
+        <p><b>Your bank accounts</b></p>
+        <thead>
+            <tr>
+                <th>card_id</th>
+                <th scope="col">user_name </th>
+                <th scope="col">credit_debit</th>
+                <th scope="col">bank_name </th>
+            </tr>
+        </thead>
+        <tbody>
+        	{% for row in card %}
+              <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+              </tr>
+        	{% endfor %}
+
+        </tbody>
+    </table>
+  </div>
 
     <div>
         <p><b>Risk Evaluation</b></p>
@@ -38,11 +65,3 @@
 <a href="/">Back to home
 
 </html>
-
-
-
-
-
-
-
-

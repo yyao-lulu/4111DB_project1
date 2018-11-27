@@ -88,6 +88,11 @@ def index():
             if user is None:
                 return render_template('index.html', error="No such user")
             return redirect(url_for('read_user', id=data['content']))
+
+            #user_card = cursor2.fetchone()
+            #if user_card is None:
+                #return render_template('index.html', error="No such user")
+            #return redirect(url_for('read_card', id=data['content']))
         elif data['option'] == 'trx_by_date':
             cursor = g.conn.execute("SELECT payment_id FROM transa_transf WHERE created_time = %s", data['content'])
             transaction_by_date = cursor.fetchone()
@@ -120,9 +125,12 @@ def trxs():
 def read_user(id):
   cursor = g.conn.execute("SELECT * FROM venmo_users WHERE user_name = %s", id)
   user = cursor.fetchone()
+  cursor = g.conn.execute("SELECT * from bank_pay where user_name = %s", id)
+  card = cursor.fetchall()
   cursor = g.conn.execute("SELECT * FROM person_risk_result WHERE user_name = %s", id)
   risk = cursor.fetchone()
-  return render_template('/user.html', user=user, risk=risk)
+
+  return render_template('/user.html', user=user, risk=risk, card = card)
 
 @app.route('/risk/<id>')
 def read_risk(id):
